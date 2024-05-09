@@ -1,9 +1,10 @@
 import React from "react";
 
+
 function Dashboard() {
   return (
-    <div className="">
-      Welcome to Studynotion!
+    <div className="flex justify-center items-center">
+      Welcome to Studynotion
     </div>
   );
 }

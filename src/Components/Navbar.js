@@ -1,12 +1,12 @@
 import React from "react";
 import logo from "../assets/Logo.svg";
 import { Link } from "react-router-dom";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 // import { useState } from "react";
 
 const Navbar = (props) => {
-  const isLoggedIn=props.isLoggedIn;
-  const setIsLoggedIn=props.setIsLoggedIn;
+  let isLoggedIn = props.isLoggedIn;
+  let setIsLoggedIn = props.setIsLoggedIn;
   return (
     <div className="flex  justify-evenly">
       <Link to="/">
@@ -20,42 +20,53 @@ const Navbar = (props) => {
           </li>
 
           <li>
-            <Link to="#">About</Link>
+            <Link to="/">About</Link>
           </li>
 
           <li>
-            <Link to="#">Contact</Link>
+            <Link to="/">Contact</Link>
           </li>
         </ul>
       </nav>
 
       <div className="flex ml-5 mr-3 gap-3">
-        { !isLoggedIn && 
+        {!isLoggedIn && (
           <Link to="/login">
-            <button>Login</button>
+            <button
+              onClick={() => {
+                setIsLoggedIn(true); // Assuming logging in sets isLoggedIn to true
+                toast.success("Logged In"); // Changed to "Logged In"
+              }}
+            >
+              Login
+            </button>
           </Link>
-        }
+        )}
 
-        { !isLoggedIn &&
+        {!isLoggedIn && (
           <Link to="/signup">
-            <button >SignUp</button>
+            <button>SignUp</button>
           </Link>
-        }
+        )}
 
-        { isLoggedIn &&
+        {isLoggedIn && (
           <Link to="/">
-            <button onClick={()=>{
-              setIsLoggedIn(false);
-              toast.success("logged Out");
-            }}>LogOut</button>
+            <button
+              onClick={() => {
+                setIsLoggedIn(false);
+                toast.success("logged Out");
+              }}
+            >
+              LogOut
+            </button>
           </Link>
-        }
+        )}
 
-        {   isLoggedIn &&
+        {isLoggedIn && (
           <Link to="/dashboard">
             <button>Dashboard</button>
           </Link>
-        }
+        )}
       </div>
     </div>
   );
